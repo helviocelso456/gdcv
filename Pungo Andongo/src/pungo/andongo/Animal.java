@@ -15,4 +15,35 @@ public class Animal {
     private String raca;
     private int idade;
     private proprietario proprietario;
+    
+    //Metodos Getter
+    public int getIdentificador()
+    {
+        return identificador;
+    }
+    
+    public String getNome()
+    {
+        return nome;
+    }
+    
+    public String getEspecie()
+    {
+        return especie;
+    }
+    
+    public String getRaca()
+    {
+        return raca;
+    }
+    
+    public int getIdade()
+    {
+        return idade;
+    }
+    
+    public proprietario getProprietario()
+    {
+        return proprietario;
+    }
 }
