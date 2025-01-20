@@ -49,7 +49,7 @@ public class Bem_Vindo extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("<html>SGV - Sistema de Gestão de <br>Clinicas Veterinárias</html>");
 
-        jButton1.setBackground(new java.awt.Color(76, 175, 80));
+        jButton1.setBackground(new java.awt.Color(0, 102, 51));
         jButton1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Visitas");
@@ -59,7 +59,7 @@ public class Bem_Vindo extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(76, 175, 80));
+        jButton3.setBackground(new java.awt.Color(0, 102, 51));
         jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Proprietários");
@@ -69,7 +69,7 @@ public class Bem_Vindo extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(76, 175, 80));
+        jButton5.setBackground(new java.awt.Color(0, 102, 51));
         jButton5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Animais");

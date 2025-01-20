@@ -54,7 +54,7 @@ public class Menu_Proprietario extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Proprietários");
 
-        jButton1.setBackground(new java.awt.Color(76, 175, 80));
+        jButton1.setBackground(new java.awt.Color(0, 102, 51));
         jButton1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Registar Proprietário");
@@ -64,7 +64,7 @@ public class Menu_Proprietario extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(76, 175, 80));
+        jButton2.setBackground(new java.awt.Color(0, 102, 51));
         jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Voltar");
@@ -74,7 +74,7 @@ public class Menu_Proprietario extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(76, 175, 80));
+        jButton3.setBackground(new java.awt.Color(0, 102, 51));
         jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Listagem de Proprietários");
@@ -82,7 +82,7 @@ public class Menu_Proprietario extends javax.swing.JFrame {
         jButton3.setMinimumSize(new java.awt.Dimension(228, 23));
         jButton3.setPreferredSize(new java.awt.Dimension(228, 23));
 
-        jButton4.setBackground(new java.awt.Color(76, 175, 80));
+        jButton4.setBackground(new java.awt.Color(0, 102, 51));
         jButton4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Qtd de animais por proprietário");
@@ -137,6 +137,8 @@ public class Menu_Proprietario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new RegistarProprietario().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
