@@ -1,0 +1,2 @@
+cli1ao|Chibi|CACHORRO|CANICHE|1|d1ao
+cli1ao|Caniço|CACHORRO|CANICHE|5|d1ao

@@ -140,16 +140,12 @@ public class RegistarProprietario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //Instanciando a classe
-        proprietario proprietario = new proprietario();
         //Atribuindo os valores
         String nome = txtNome.getText();
         String contacto = txtContacto.getText();
-        //Metodos Set
-        proprietario.setNome(nome);
-        proprietario.setContacto(contacto);
-        //Registando
-        proprietario.registarProprietario();
+        //Instanciando a classe
+        proprietario proprietario = new proprietario(nome,contacto);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

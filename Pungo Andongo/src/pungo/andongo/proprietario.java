@@ -16,9 +16,28 @@ import javax.swing.JOptionPane;
  * @author helvi
  */
 public class proprietario {
-    private int identificador = 100;
+    private static int identificador = 001;
     private String nome;
     private String contacto;
+    
+    //Construtor
+    public proprietario(String nome, String contacto)
+    {
+         setNome(nome);
+         setContacto(contacto);
+         registarProprietario();
+    }
+    
+    //Copy Constructor
+    public proprietario(String identificador)
+    {
+        consultaProprietario(identificador);
+    }
+    
+    public proprietario()
+    {
+        
+    }
     
     //Metodos Getter
     public int getIdentificador()
@@ -42,17 +61,17 @@ public class proprietario {
         this.identificador = id;
     }
     
-    public void setNome(String nome)
+    private void setNome(String nome)
     {
         this.nome = nome;
     }
     
-    public void setContacto(String contacto)
+    private void setContacto(String contacto)
     {
         this.contacto = contacto;
     }
     
-     public void atualizarID() {
+     private void atualizarID() {
         String caminho = "src/Arquivos/proprietario.txt";
         
         try (BufferedReader leitor = new BufferedReader(new FileReader(caminho))) {
@@ -61,13 +80,16 @@ public class proprietario {
             
             // Ler o arquivo para encontrar o último ID
             while ((l = leitor.readLine()) != null) {
+                 //Criamos um array string que ira receber as linhas, o split diz que cada pos esta delimitada por |
                 String[] row = l.split("\\|");
-                if (row.length > 1) {
-                    ultimo_id = row[1];
+                //Verifica se a largura ou tam é maior que zero
+                if (row.length > 0) {
+                    //Pega o id que esta na pos 0
+                    ultimo_id = row[0];
                 }
             }
             
-            // Atualizar o ID do cliente
+            // Atualizar o ID do proprietario
             if (ultimo_id != null) {
                 try {
                     // Extrai apenas os dígitos do ID encontrado
@@ -78,11 +100,11 @@ public class proprietario {
                     System.out.println(valor);
                     
                 } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Erro ao converter o ID do cliente");
+                    JOptionPane.showMessageDialog(null, "Erro ao converter o ID do proprietario");
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao ler arquivo de clientes");
+            JOptionPane.showMessageDialog(null, "Erro ao ler arquivo do proprietario");
             
         }
     }
@@ -114,10 +136,11 @@ public class proprietario {
                     br.write(propId+"|"+nome+"|"+contacto);
                     //Quebra uma linha
                     br.newLine();
-                    br.flush();
-                    //Encerra a variavel para n haver comportamentos inesperados
+                    //Encera a variavel
                     br.close();
-                    JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso"); 
+                    JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso\n"+toString());
+                    //Atualizamos o id
+                    atualizarID();
                 }
                 
                 catch(Exception e)
@@ -128,17 +151,17 @@ public class proprietario {
             
             else
             {  //Abrimos o tratamento de exceptions
-                try(BufferedWriter br = new BufferedWriter(new FileWriter(caminho)))
-                {   //Atualizamos o id
-                    atualizarID();
+                try(BufferedWriter br = new BufferedWriter(new FileWriter(caminho,true)))
+                {   
                     //Aqui ele escreve
-                    br.write(propId+"|"+nome+"|"+contacto);
+                    br.write(propId+"|"+nome+"|"+contacto); 
                     //Quebra uma linha
                     br.newLine();
-                    br.flush();
-                    //Encerra a variavel para n haver comportamentos inesperados
+                    //Encerra a variavel
                     br.close();
-                    JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso");
+                    JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso\n"+toString());
+                    //Atualizamos o id
+                    atualizarID();
                 }
                 
                 catch(Exception e)
@@ -149,6 +172,62 @@ public class proprietario {
                
         }
         
+    }
+    
+    //Consulta o proprietario
+    public static String consultaProprietario(String identificador)
+    {
+        //Caminho
+        String caminho = "src/Arquivos/proprietario.txt";
+        //Tipo file para posterior verificacao
+        File arquivo = new File(caminho);
+        //Verifica se existe
+        if(!arquivo.exists())
+        {       
+               JOptionPane.showMessageDialog(null,"Nenhum proprietário registado");
+               return null;
+        }
+           
+        else
+        {   //Acede a memória para leitura
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+             String l;
+             String id = null;
+             //Percorre o arquivo linha por linha
+             while((l =leitor.readLine()) != null)
+             {   //Cria um array de string e diz que ela é delimitada por | e armazena cada parte da linha no array
+                 String row[] = l.split("\\|");
+                 //Verifica se o id que esta na pos 0 é igual ao do parametro
+                 if(row[0].equals(identificador))
+                 {  // Retorna o id caso encontre
+                     return row[0];
+                 }
+                 
+             }
+             
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível consultar o proprietário");
+                return null;
+            }
+        }
+           
+       return null;     
+        
+    }
+    
+    //Metodo toString para exibir os dados
+    public String toString()
+    {
+        return "d"+identificador+"ao"+"\n"+nome+"\n"+contacto;
+    }
+    
+    public static void main(String [] args )
+    {
+        String id = consultaProprietario("d1ao");
+        System.out.println(id);
     }
     
     
