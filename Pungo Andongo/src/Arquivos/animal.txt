@@ -1,2 +1,2 @@
-cli1ao|Chibi|CACHORRO|CANICHE|1|d1ao
-cli1ao|Caniço|CACHORRO|CANICHE|5|d1ao
+cli1ao|Diela|CACHORRO|CANICHE|2|d1ao
+cli2ao|Chinguaia|CACHORRO|CANICHE|2|d2ao

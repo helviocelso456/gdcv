@@ -114,7 +114,7 @@ public class proprietario {
     {   //caminho onde ficara armazenado o arquivo txt
         String caminho = "src/Arquivos/proprietario.txt";
         //id concatenado com a string
-        String propId = "d"+identificador+"ao";
+        String propId = "d"+getIdentificador()+"ao";
         //Para verificar se o arquivo existe usamos a classe file
         File linha = new File(caminho);
         
@@ -139,8 +139,7 @@ public class proprietario {
                     //Encera a variavel
                     br.close();
                     JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso\n"+toString());
-                    //Atualizamos o id
-                    atualizarID();
+                    
                 }
                 
                 catch(Exception e)
@@ -153,6 +152,10 @@ public class proprietario {
             {  //Abrimos o tratamento de exceptions
                 try(BufferedWriter br = new BufferedWriter(new FileWriter(caminho,true)))
                 {   
+                    //Atualizamos o id
+                    atualizarID();
+                    //Novo valor do identificador
+                    propId = "d"+getIdentificador()+"ao";
                     //Aqui ele escreve
                     br.write(propId+"|"+nome+"|"+contacto); 
                     //Quebra uma linha
@@ -160,8 +163,7 @@ public class proprietario {
                     //Encerra a variavel
                     br.close();
                     JOptionPane.showMessageDialog(null,"Proprietário cadastrado com sucesso\n"+toString());
-                    //Atualizamos o id
-                    atualizarID();
+                    
                 }
                 
                 catch(Exception e)
@@ -205,7 +207,7 @@ public class proprietario {
                  }
                  
              }
-             
+             leitor.close();
             }
             catch(Exception e)
             {

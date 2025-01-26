@@ -28,6 +28,11 @@ public class Animal {
     private proprietario proprietario;
     
     //Construtores
+    public Animal()
+    {
+        
+    }
+    
     public Animal(String codProp,String nome, String especie, String raca, String dataNasc)
     {  
         //Atribuindo valores
@@ -56,9 +61,9 @@ public class Animal {
         }
     }
     
-    public Animal(String identificador)
+    public Animal(String codAnimal)
     {
-        
+        consultarAnimal(codAnimal);
     }
     
     //Registar animal
@@ -67,7 +72,7 @@ public class Animal {
         //Criando o caminho
         String caminho = "src/arquivos/animal.txt";
         // Identificador Concatenado
-        String animalId = "cli"+identificador+"ao";
+        String animalId = "cli"+getIdentificador()+"ao";
         //Tipo File
         File arquivo = new File(caminho);
         
@@ -93,8 +98,7 @@ public class Animal {
                 escritor.close();
                 //Mensagem
                 JOptionPane.showMessageDialog(null, "Animal Registado com Sucesso\n"+toString());
-                //Incrementa o id
-                atualizarIdentificador();
+                
              }
              catch(Exception e)
              {
@@ -109,6 +113,10 @@ public class Animal {
              //Levou o parametro true para n sobescrever os dados antigos
              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho,true)))
              {
+                 //Incrementa o id
+                atualizarIdentificador();
+                //Com o novo valor do identificador
+                animalId = "cli"+getIdentificador()+"ao";
                 //registando
                 escritor.write(animalId+"|"+nome+"|"+especie+"|"+raca+"|"+idade+"|"+codProp);
                 //Quebra a linha
@@ -117,8 +125,7 @@ public class Animal {
                 escritor.close();
                 //Mensagem
                 JOptionPane.showMessageDialog(null, "Animal Registado com Sucesso\n"+toString());
-                //Incrementa o id
-                atualizarIdentificador();
+                
              }
              catch(Exception e)
              {
@@ -127,6 +134,47 @@ public class Animal {
              }  
           }
         }
+    }
+    
+    public static String consultarAnimal(String identificador)
+    {
+        //Caminho
+        String caminho = "src/Arquivos/animal.txt";
+        //Tipo file para posterior verificacao
+        File arquivo = new File(caminho);
+        //Verifica se existe
+        if(!arquivo.exists())
+        {       
+               JOptionPane.showMessageDialog(null,"Nenhum proprietário registado");
+               return null;
+        }
+        else
+        {
+             //Acede a memória para leitura
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+             String l;
+             String id = null;
+             //Percorre o arquivo linha por linha
+             while((l =leitor.readLine()) != null)
+             {   //Cria um array de string e diz que ela é delimitada por | e armazena cada parte da linha no array
+                 String row[] = l.split("\\|");
+                 //Verifica se o id que esta na pos 0 é igual ao do parametro
+                 if(row[0].equals(identificador))
+                 {  // Retorna o id caso encontre
+                     return row[0];
+                 }
+                 
+             }
+             
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível consultar o animal");
+                return null;
+            }
+        }
+        return null;
     }
     
     //Metodos Getter
@@ -249,6 +297,8 @@ public class Animal {
                    JOptionPane.showMessageDialog(null,"Não foi possivel atualizar o id"); 
                 }
             }
+            
+            leitor.close();
         }
         
         catch(Exception e)
@@ -261,5 +311,10 @@ public class Animal {
     public String toString()
     {
         return "cli"+identificador+"ao"+"\n"+nome+"\n"+especie+"\n"+raca+"\n"+idade+" ano(s)de idade";
+    }
+    
+    public static void main(String [] args)
+    {
+        System.out.println(consultarAnimal("cli1ao"));
     }
 }

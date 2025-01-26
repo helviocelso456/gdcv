@@ -84,6 +84,8 @@ public class RegistarAnimal extends javax.swing.JFrame {
 
         jLabel5.setText("NOME");
 
+        txtProp.setText("dxao");
+
         jLabel6.setText("DATA DE NASCIMENTO(yy-mm-dd)");
 
         jButton1.setText("VOLTAR");

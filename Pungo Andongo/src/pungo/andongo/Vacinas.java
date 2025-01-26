@@ -4,6 +4,13 @@
  */
 package pungo.andongo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author helvi
@@ -11,9 +18,112 @@ package pungo.andongo;
 public class Vacinas extends Visitas {
     private String nomeVacina;
     
+    //Construtores
+    public Vacinas()
+    {
+        
+    }
+    
+    public Vacinas(String nVacinas, String codAnimal, int custo, String dataVacinas)
+    {   
+        //Atribui o nome do valor
+        super(dataVacinas, custo);
+        setNomeVacina(nVacinas);
+        Animal animal = new Animal();
+        if(animal.consultarAnimal(codAnimal) != null)
+        {
+           registarVacinas(codAnimal); 
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Animal não encontrado");
+        }
+    }
+    
+    //Registando as vacinas
+    private void registarVacinas(String codAnimal)
+    {
+       String dVisita = getDataVisita();
+       if (dVisita == null) 
+       {
+           JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
+           return; // Evita que o código continue caso o campo esteja vazio
+       }
+       
+       if(nomeVacina.isEmpty() || dVisita.isEmpty()) 
+       {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
+       }
+       
+       else
+       {
+           //Caminho
+          String caminho = "src/Arquivos/visita.txt";
+          //Tipo File
+          File arquivo = new File(caminho);
+          //Atributos
+          int custo = getCustoPrestado();
+          
+          //Caso o arquivo não exista
+          if(!arquivo.exists())
+          {
+              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))  
+             {
+                 //Registando
+                 escritor.write(getIdentificador()+"|"+"Vacina"+"|"+nomeVacina+"|"+custo+"|"+codAnimal+"|"+dVisita);
+                 //Quebrando a linha
+                 escritor.newLine();
+                 //Encerrando a variavel
+                 escritor.close();
+                 //Mensagem
+                 JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
+             }
+             
+             catch(Exception e)
+             {
+                JOptionPane.showMessageDialog(null,"Não foi possível registar a visita\n"+e); 
+             }
+          }
+          
+          else
+          {
+              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho,true)))  
+             {
+                 //Atualizando o identificador
+                 atualizarId();
+                 //Registando
+                 escritor.write(getIdentificador()+"|"+"Vacina"+"|"+nomeVacina+"|"+custo+"|"+codAnimal+"|"+dVisita);
+                 //Quebrando a linha
+                 escritor.newLine();
+                 //Encerrando a variavel
+                 escritor.close();
+                 //Mensagem
+                 JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
+             }
+             
+             catch(Exception e)
+             {
+                 JOptionPane.showMessageDialog(null,"Não foi possível registar a visita\n"+e); 
+             }
+          }
+       }
+    }
     //Metodo Get
     public String getVacina()
     {
         return nomeVacina;
+    }
+    
+    //Metodo Setter
+    private void setNomeVacina(String nVacina)
+    {
+        this.nomeVacina = nVacina;
+    }
+    
+    
+    public String toString()
+    {
+       return getIdentificador()+"\n"+"Tipo de Visita: Vacina"+"\n"+"Nome da Vacina:"+nomeVacina+"\n"+"Custo: "+getCustoPrestado()+" AOA"+"\n"+"Data da Visita: "+getDataVisita(); 
     }
 }
