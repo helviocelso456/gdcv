@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 //Biblioteca period para calcular a diferença entre datas
 import java.time.Period;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Animal {
@@ -177,6 +178,52 @@ public class Animal {
         return null;
     }
     
+    //Listagem de animal
+    public ArrayList<String[]> ListarAnimal()
+    {
+        //Caminho
+        String caminho = "src/Arquivos/animal.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não existem animais registados no sistema.");
+            return null;
+        }
+        
+        else
+        {
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+               //Vai receber as linhas
+               String l;
+               
+               while((l = leitor.readLine()) != null)
+               {
+                   //Pega as linhas e delimita elas
+                   String row[] = l.split("\\|");
+                   //Adiciona a linha a lista
+                   lista.add(row);
+               }
+               
+               leitor.close();
+               
+            }
+            
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar os animais."+e);
+                return null;
+            }
+            
+        }
+        
+        return lista;
+    }
+    
     //Metodos Getter
     public int getIdentificador()
     {
@@ -310,7 +357,7 @@ public class Animal {
     //Metodo toString
     public String toString()
     {
-        return "cli"+identificador+"ao"+"\n"+nome+"\n"+especie+"\n"+raca+"\n"+idade+" ano(s)de idade";
+        return "cli"+identificador+"ao"+"\n"+"Nome: "+nome+"\n"+"Especie: "+especie+"\n"+"Raça: "+raca+"\n"+"Idade: "+idade+" ano(s)de idade";
     }
     
     public static void main(String [] args)

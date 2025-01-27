@@ -81,6 +81,11 @@ public class Menu_Proprietario extends javax.swing.JFrame {
         jButton3.setMaximumSize(new java.awt.Dimension(228, 23));
         jButton3.setMinimumSize(new java.awt.Dimension(228, 23));
         jButton3.setPreferredSize(new java.awt.Dimension(228, 23));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 102, 51));
         jButton4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -146,6 +151,12 @@ public class Menu_Proprietario extends javax.swing.JFrame {
         new Bem_Vindo().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new ListarProprietario().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

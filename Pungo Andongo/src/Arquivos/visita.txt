@@ -1,2 +1,2 @@
-1|Consulta|Ferimento na pata|16000|cli1ao|2025-01-26
-2|Vacina|Pfizer|8000|cli2ao|2025-01-26
+1|Consulta|Doença|16000|cli3ao|2025-01-27
+2|Consulta|Ferimento na pata|16000|cli1ao|2025-01-27

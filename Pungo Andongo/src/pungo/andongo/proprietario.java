@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +34,7 @@ public class proprietario {
     {
         consultaProprietario(identificador);
     }
+    
     
     public proprietario()
     {
@@ -218,6 +220,47 @@ public class proprietario {
            
        return null;     
         
+    }
+    
+    public ArrayList<String[]> ListarProprietario()
+    {   
+        //Caminho do arquivo
+        String caminho = "src/Arquivos/proprietario.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        //Lista que armazena os dados
+        ArrayList<String[]> lista = new ArrayList<>();
+        
+        if(!arquivo.exists())
+        {
+           JOptionPane.showMessageDialog(null,"Não existem proprietários cadastrados no sistema.");
+           return null;
+        }
+        
+        else
+        {
+            //Vai ser usada para comparação no laço
+            String l;
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                while((l = leitor.readLine()) != null)
+                {
+                    String row[] = l.split("\\|");
+                    lista.add(row);
+                }
+                
+                leitor.close();
+            }
+            
+            catch(Exception e )
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar os proprietários.");
+                return null;
+            }
+            
+        }
+          return lista;
     }
     
     //Metodo toString para exibir os dados

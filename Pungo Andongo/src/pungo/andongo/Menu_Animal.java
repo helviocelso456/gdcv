@@ -73,6 +73,11 @@ public class Menu_Animal extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Listagem de Animais");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 102, 51));
         jButton4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -143,6 +148,12 @@ public class Menu_Animal extends javax.swing.JFrame {
         new RegistarAnimal().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new ListarAnimal().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

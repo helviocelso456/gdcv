@@ -1,2 +1,3 @@
-cli1ao|Diela|CACHORRO|CANICHE|2|d1ao
-cli2ao|Chinguaia|CACHORRO|CANICHE|2|d2ao
+cli1ao|Chibi|GATO|GATO|1|d1ao
+cli2ao|Spike|CACHORRO|PASTOR ALEMÃO|1|d2ao
+cli3ao|Brutus|CACHORRO|BULDOG|1|d1ao

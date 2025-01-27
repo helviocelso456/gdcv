@@ -5,7 +5,9 @@
 package pungo.andongo;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -127,6 +129,48 @@ public class Visitas {
        {
            JOptionPane.showMessageDialog(null,"Não foi possível atualizar o identificador");
        }
+    }
+    
+    //Listagem de visitas
+    public ArrayList<String[]> ListarVisita()
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Caminho
+        String caminho = "src/Arquivos/visita.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não existem visitas registadas");
+            return null;
+        }
+        
+        else
+        {  
+            //Tratamento de Excessões
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                //Vai receber as linhas
+                String l;
+                //While
+                while((l = leitor.readLine()) != null)
+                {
+                    String row[] = l.split("\\|");
+                    lista.add(row);
+                }
+            }
+            
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
+                return null;
+            }
+        }
+        
+        
+        return lista;
     }
     
     
