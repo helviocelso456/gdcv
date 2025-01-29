@@ -68,7 +68,7 @@ public class RegistarVisitas extends javax.swing.JFrame {
 
         jCusto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "16.000 AOA" }));
 
-        jVisita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONSULTA", "VACINA" }));
+        jVisita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CONSULTA", "VACINA", "HIGIENE" }));
         jVisita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVisitaActionPerformed(evt);
@@ -211,13 +211,21 @@ public class RegistarVisitas extends javax.swing.JFrame {
             jCusto.setModel(new DefaultComboBoxModel<>(new String[]{"16.000 AOA"}));
             jMotivo.setEnabled(true);
             jVacina.setEnabled(false);
-        } else
+        } 
+        else if(itemSelecionado.equals("VACINA"))
           {
              jCusto.setModel(new DefaultComboBoxModel<>(new String[]{"8.000 AOA"}));
              jMotivo.setEnabled(false);
              jVacina.setEnabled(true);
              
           }
+        
+        else
+        {
+            jCusto.setModel(new DefaultComboBoxModel<>(new String[]{"5.000 AOA"}));
+            jMotivo.setEnabled(false);
+            jVacina.setEnabled(false);
+        }
     }//GEN-LAST:event_jVisitaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -235,7 +243,7 @@ public class RegistarVisitas extends javax.swing.JFrame {
             //Chamando a classe
             new Visitas(tipodevisita,custo,motivo,codAnimal ,dataVisita);
         } 
-        else
+        else if(tipodevisita.equals("VACINA"))
         {
            //Valores
            int custo = 8000; 
@@ -244,6 +252,16 @@ public class RegistarVisitas extends javax.swing.JFrame {
            String codAnimal = jAnimal.getText();
            //Chamando a classe
            new Visitas(tipodevisita,dataVisita,nomeVacina,codAnimal ,custo);
+        }
+        
+        else
+        {
+           //Valores
+           int custo = 5000; 
+           String dataVisita = jDataVisita.getText();
+           String codAnimal = jAnimal.getText();
+           //Chamando a classe
+           new Visitas(tipodevisita, dataVisita,codAnimal ,custo);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

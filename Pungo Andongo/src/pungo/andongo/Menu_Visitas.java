@@ -90,7 +90,7 @@ public class Menu_Visitas extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 102, 51));
         jButton4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Consultas");
+        jButton4.setText("Qtd de Visitas Realizadas por Animal");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -165,6 +165,8 @@ public class Menu_Visitas extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        new QuantidadeDeVisitasPorAnimal().setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jButton4ActionPerformed
 

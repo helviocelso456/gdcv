@@ -7,6 +7,7 @@ package pungo.andongo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -33,7 +34,14 @@ public class Visitas {
         setTipoVisita(tipoVisita);
         setCustoPrestado(custo);
         setDataVisita(dataVisita);
-        new Consulta(motivo, codAnimal,custo,dataVisita);
+        if(dataVisita.isEmpty() || dataVisita.isBlank())
+        {
+            JOptionPane.showMessageDialog(null,"Preencha os campos vazios");
+        }
+        else
+        {
+            new Consulta(motivo, codAnimal,custo,dataVisita);
+        }
         
     }
     
@@ -43,8 +51,32 @@ public class Visitas {
        setTipoVisita(tipoVisita);
        setCustoPrestado(custo);
        setDataVisita(dataVisita);
-       new Vacinas(nVacinas, codAnimal, custo, dataVisita);
+       if(dataVisita.isBlank() || dataVisita.isEmpty())
+       {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios");
+       }
+       else
+       {
+           new Vacinas(nVacinas, codAnimal, custo, dataVisita);
+       }
     }
+    public Visitas(String tipoVisita, String dataVisita,String codAnimal ,int custo)
+    {
+       //Caso seja vacina 
+       setTipoVisita(tipoVisita);
+       setCustoPrestado(custo);
+       setDataVisita(dataVisita);
+       if(dataVisita.isBlank() || dataVisita.isEmpty())
+       {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios");
+       }
+       else
+       {
+           new Higiene(dataVisita, codAnimal, custo);
+       }
+    }
+    
+    
     
     //Construtor com as consultas
     public Visitas(int custo, String dVisita)
@@ -173,7 +205,224 @@ public class Visitas {
         return lista;
     }
     
+    public ArrayList<String[]> ListagemDeVisitasPorTipo(String tipo)
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Camonho
+        String caminho = "src/Arquivos/visita.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não Existem Visitas Cadastradas");
+            return null;
+        }
+        
+        else{
+            
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                String l;
+                //Laço
+                while((l = leitor.readLine()) != null)
+                {
+                   String row[] = l.split("\\|");
+                   if(row.length > 1)
+                   {
+                       if(row[1].equals(tipo))
+                       {
+                           lista.add(row);
+                       }
+                   }
+                }
+            }
+            catch(Exception e )
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
+                return null;
+            }
+        }
+        
+        
+         
+        return lista;
+    }
+    public ArrayList<String[]> ListagemVacinaPorNomeData(String nomeV, String dataV)
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Camonho
+        String caminho = "src/Arquivos/visita.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        LocalDate dataVisita = LocalDate.parse(dataV);
+       //Data Inferior a ser validade
+       LocalDate dataLimite = LocalDate.parse("2024-01-01");
+       //Data Superior a ser validada
+       LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
+       
+       if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não Existem Visitas Cadastradas");
+            return null;
+        }
+        
+       if (dataVisita == null) 
+       {
+           JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
+           return null; // Evita que o código continue caso o campo esteja vazio
+       }
+       
+       if(nomeV.isEmpty()) 
+       {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
+           return null;
+       }
+       
+       if(dataVisita.isBefore(dataLimite))
+       {
+          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
+       }
+       
+       else if(dataVisita.isAfter(dataLimiteSup))
+       {
+           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
+       }
+        
+        else{
+            
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                String l;
+                //Laço
+                while((l = leitor.readLine()) != null)
+                {
+                   String row[] = l.split("\\|");
+                   if(row.length > 1)
+                   {
+                       if(row[2].equals(nomeV) && row[5].equals(dataV))
+                       {
+                           lista.add(row);
+                       }
+                   }
+                }
+            }
+            catch(Exception e )
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
+                return null;
+            }
+        }
+        
+        
+         
+        return lista;
+    }
     
+    
+    public ArrayList<String[]> ListagemDeConsultasRealizadasPorAnimal(String codAnimal)
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Camonho
+        String caminho = "src/Arquivos/visita.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não Existem Visitas Cadastradas");
+            return null;
+        }
+        
+        if(codAnimal.isEmpty() || codAnimal.isBlank())
+        {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
+           return null;
+        }
+        
+        else{
+            
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                String l;
+                //Laço
+                while((l = leitor.readLine()) != null)
+                {
+                   String row[] = l.split("\\|");
+                   if(row.length > 4)
+                   {
+                       if(row[4].equals(codAnimal) && row[1].equals("Consulta"))
+                       {
+                           lista.add(row);
+                       }
+                   }
+                }
+            }
+            catch(Exception e )
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
+                return null;
+            }
+        }
+        
+        
+         
+        return lista;
+    }
+    public ArrayList<String[]> ListagemDeHigieneRealizadasPorAnimal(String codAnimal)
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Camonho
+        String caminho = "src/Arquivos/visita.txt";
+        //Tipo File
+        File arquivo = new File(caminho);
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não Existem Visitas Cadastradas");
+            return null;
+        }
+        
+        if(codAnimal.isEmpty() || codAnimal.isBlank())
+        {
+           JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
+           return null;
+        }
+        
+        else{
+            
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+                String l;
+                //Laço
+                while((l = leitor.readLine()) != null)
+                {
+                   String row[] = l.split("\\|");
+                   if(row.length > 4)
+                   {
+                       if(row[4].equals(codAnimal) && row[1].equals("Higiene"))
+                       {
+                           lista.add(row);
+                       }
+                   }
+                }
+            }
+            catch(Exception e )
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
+                return null;
+            }
+        }
+        
+        
+         
+        return lista;
+    }
     //Metodos Setter
     private void setTipoVisita(String tipo_de_visita)
     {

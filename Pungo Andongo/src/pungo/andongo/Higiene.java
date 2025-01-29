@@ -4,10 +4,8 @@
  */
 package pungo.andongo;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -16,24 +14,21 @@ import javax.swing.JOptionPane;
  *
  * @author helvi
  */
-public class Vacinas extends Visitas {
-    private String nomeVacina;
+public class Higiene extends Visitas {
     
-    //Construtores
-    public Vacinas()
+    public Higiene()
     {
         
     }
     
-    public Vacinas(String nVacinas, String codAnimal, int custo, String dataVacinas)
-    {   
-        //Atribui o nome do valor
-        super(dataVacinas, custo);
-        setNomeVacina(nVacinas);
+    public Higiene(String dataVisita,String codAnimal ,int custo)
+    {
+        //Chamando a superclass
+        super(dataVisita, custo);
         Animal animal = new Animal();
         if(animal.consultarAnimal(codAnimal) != null)
         {
-           registarVacinas(codAnimal); 
+           registarHigiene(codAnimal); 
         }
         
         else
@@ -43,7 +38,7 @@ public class Vacinas extends Visitas {
     }
     
     //Registando as vacinas
-    private void registarVacinas(String codAnimal)
+    private void registarHigiene(String codAnimal)
     {
        LocalDate dataV = LocalDate.parse(getDataVisita());
        //Data Inferior a ser validade
@@ -54,12 +49,6 @@ public class Vacinas extends Visitas {
        {
            JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
            return; // Evita que o código continue caso o campo esteja vazio
-       }
-       
-       if(nomeVacina.isEmpty()) 
-       {
-           JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
-           return;
        }
        
        if(dataV.isBefore(dataLimite))
@@ -87,13 +76,13 @@ public class Vacinas extends Visitas {
               try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))  
              {
                  //Registando
-                 escritor.write(getIdentificador()+"|"+"Vacina"+"|"+nomeVacina+"|"+custo+"|"+codAnimal+"|"+dataV);
+                 escritor.write(getIdentificador()+"|"+"Higiene"+"|"+"Banho"+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
                  escritor.newLine();
                  //Encerrando a variavel
                  escritor.close();
                  //Mensagem
-                 JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
+                 JOptionPane.showMessageDialog(null,"Visita para Higiene Registada com sucesso\n"+toString());
              }
              
              catch(Exception e)
@@ -109,13 +98,13 @@ public class Vacinas extends Visitas {
                  //Atualizando o identificador
                  atualizarId();
                  //Registando
-                 escritor.write(getIdentificador()+"|"+"Vacina"+"|"+nomeVacina+"|"+custo+"|"+codAnimal+"|"+dataV);
+                 escritor.write(getIdentificador()+"|"+"Higiene"+"|"+"Banho"+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
                  escritor.newLine();
                  //Encerrando a variavel
                  escritor.close();
                  //Mensagem
-                 JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
+                 JOptionPane.showMessageDialog(null,"Visita para Higiene Registada com sucesso\n"+toString());
              }
              
              catch(Exception e)
@@ -125,21 +114,10 @@ public class Vacinas extends Visitas {
           }
        }
     }
-    //Metodo Get
-    public String getVacina()
-    {
-        return nomeVacina;
-    }
-    
-    //Metodo Setter
-    private void setNomeVacina(String nVacina)
-    {
-        this.nomeVacina = nVacina;
-    }
-    
     
     public String toString()
     {
-       return getIdentificador()+"\n"+"Tipo de Visita: Vacina"+"\n"+"Nome da Vacina:"+nomeVacina+"\n"+"Custo: "+getCustoPrestado()+" AOA"+"\n"+"Data da Visita: "+getDataVisita(); 
+       return getIdentificador()+"\n"+"Tipo de Visita: Higiene"+"\n"+"Motivo: Banho"+"\n"+"Custo: "+getCustoPrestado()+" AOA"+"\n"+"Data da Visita: "+getDataVisita(); 
     }
+    
 }

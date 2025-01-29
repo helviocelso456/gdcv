@@ -161,9 +161,10 @@
     <Component class="javax.swing.JComboBox" name="jVisita">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="3">
             <StringItem index="0" value="CONSULTA"/>
             <StringItem index="1" value="VACINA"/>
+            <StringItem index="2" value="HIGIENE"/>
           </StringArray>
         </Property>
       </Properties>

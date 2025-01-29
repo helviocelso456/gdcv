@@ -1,2 +1,7 @@
-1|Consulta|Doença|16000|cli3ao|2025-01-27
-2|Consulta|Ferimento na pata|16000|cli1ao|2025-01-27
+1|Consulta|Febre|16000|cli1ao|2025-01-29
+2|Vacina|Astra Zeneca|8000|cli1ao|2024-01-20
+3|Vacina|Pfizer|8000|cli1ao|2024-08-23
+4|Consulta|Sida|16000|cli1ao|2024-03-01
+5|Higiene|Banho|5000|cli1ao|2024-05-21
+6|Higiene|Banho|5000|cli1ao|2024-06-01
+7|Higiene|Banho|5000|cli1ao|2024-06-02

@@ -45,16 +45,29 @@ public class Consulta extends Visitas {
     //Criando Consultas
     private void registarConsultas(String codAnimal)
     {
-       String dVisita = getDataVisita();
-       if (dVisita == null) 
+       LocalDate dataV = LocalDate.parse(getDataVisita());
+       LocalDate dataLimite = LocalDate.parse("2024-01-01");
+       LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
+       if (dataV == null) 
        {
            JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
            return; // Evita que o código continue caso o campo esteja vazio
        }
        
-       if(motivo.isEmpty() || dVisita.isEmpty()) 
+       if(motivo.isEmpty()) 
        {
            JOptionPane.showMessageDialog(null,"Preencha os campos vazios.");
+           return;
+       }
+       
+       if(dataV.isBefore(dataLimite))
+       {
+          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
+       }
+       
+       else if(dataV.isAfter(dataLimiteSup))
+       {
+           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
        }
        
        else
@@ -71,7 +84,7 @@ public class Consulta extends Visitas {
              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))  
              {
                  //Registando
-                 escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dVisita);
+                 escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
                  escritor.newLine();
                  //Encerrando a variavel
@@ -92,7 +105,7 @@ public class Consulta extends Visitas {
                  //Atualizando o identificador
                  atualizarId();
                  //Registando
-                 escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dVisita);
+                 escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
                  escritor.newLine();
                  //Encerrando a variavel
