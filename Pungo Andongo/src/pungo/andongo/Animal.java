@@ -224,6 +224,62 @@ public class Animal {
         return lista;
     }
     
+    public ArrayList<String[]> ListarAnimalPorProprietario(String codProp)
+    {
+        //Lista
+        ArrayList<String[]> lista = new ArrayList<>();
+        //Caminho
+        String caminho = "src/Arquivos/animal.txt";
+        //File
+        File arquivo = new File(caminho);
+        
+        if(!arquivo.exists())
+        {
+            JOptionPane.showMessageDialog(null,"Não existem animais registados no sistema.");
+            return null;
+        }
+        
+        else
+        {
+            try(BufferedReader leitor = new BufferedReader(new FileReader(caminho)))
+            {
+               //Vai receber as linhas
+               String l;
+               boolean encontrado = false;
+               while((l = leitor.readLine()) != null)
+               {
+                   //Pega as linhas e delimita elas
+                   String row[] = l.split("\\|");
+                   //Adiciona a linha a lista
+                   if(row[5].equals(codProp))
+                   {
+                       lista.add(row);
+                       encontrado = true;
+                   }
+                   
+                   
+               }
+               
+               leitor.close();
+               
+               if(!encontrado)
+               {
+                   JOptionPane.showMessageDialog(null,"Não foi encontrado nenhum animal pertencente a este proprietário");
+               }
+               
+            }
+            
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Não foi possível listar os animais por por proprietário."+e);
+                return null;
+            }
+        }
+        
+        
+        return lista;
+    }
+    
     //Metodos Getter
     public int getIdentificador()
     {

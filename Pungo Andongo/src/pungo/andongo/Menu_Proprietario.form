@@ -33,11 +33,11 @@
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="2" min="-2" pref="158" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="2" min="-2" pref="225" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton2" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
+                  <Component id="jButton3" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="jImagem" alignment="2" min="-2" pref="180" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="2" max="32767" attributes="0"/>
-                  <Component id="jButton4" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton4" alignment="2" min="-2" pref="270" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
@@ -157,8 +157,11 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Qtd de animais por propriet&#xe1;rio"/>
+        <Property name="text" type="java.lang.String" value="Listagem de animais por propriet&#xe1;rio"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
