@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -253,17 +254,14 @@ public class Visitas {
     {
         //Lista
         ArrayList<String[]> lista = new ArrayList<>();
+        try{
         //Camonho
         String caminho = "src/Arquivos/visita.txt";
         //Tipo File
         File arquivo = new File(caminho);
         
         LocalDate dataVisita = LocalDate.parse(dataV);
-       //Data Inferior a ser validade
-       LocalDate dataLimite = LocalDate.parse("2024-01-01");
-       //Data Superior a ser validada
-       LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
-       
+ 
        if(!arquivo.exists())
         {
             JOptionPane.showMessageDialog(null,"Não Existem Visitas Cadastradas");
@@ -282,14 +280,9 @@ public class Visitas {
            return null;
        }
        
-       if(dataVisita.isBefore(dataLimite))
+       if(validarData(dataVisita) == false)
        {
-          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
-       }
-       
-       else if(dataVisita.isAfter(dataLimiteSup))
-       {
-           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
+           return null;
        }
         
         else{
@@ -310,13 +303,19 @@ public class Visitas {
                    }
                 }
             }
+            
             catch(Exception e )
             {
                 JOptionPane.showMessageDialog(null,"Não foi possível listar as visitas");
                 return null;
             }
         }
-        
+        }
+        catch(DateTimeParseException d)
+        {
+                 JOptionPane.showMessageDialog(null,"Insira o formato correto da data(y-mm-dd)");
+                 System.out.println(d);
+        }
         
          
         return lista;
@@ -442,6 +441,24 @@ public class Visitas {
     private void setIdentificador(int valor)
     {
         this.identificador = valor;
+    }
+    
+    public boolean validarData(LocalDate dataVisita)
+    {
+        LocalDate dataLimite = LocalDate.parse("2024-01-01");
+        LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
+        if(dataVisita.isBefore(dataLimite))
+       {
+          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
+          return false;
+       }
+       
+       else if(dataVisita.isAfter(dataLimiteSup))
+       {
+           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
+           return false;
+       }
+        return true;
     }
     
    

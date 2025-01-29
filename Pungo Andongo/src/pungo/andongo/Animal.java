@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 //Biblioteca period para calcular a diferença entre datas
 import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -79,7 +80,13 @@ public class Animal {
         
         if(idade > 5)
         {
-           JOptionPane.showMessageDialog(null,"Idade superior a 5, "+idade+" anos");  
+           JOptionPane.showMessageDialog(null,"Idade superior a 5, "+idade+" anos"); 
+           return;
+        }
+        
+        else if(idade == -1)
+        {
+           return;
         }
         
         else
@@ -135,6 +142,7 @@ public class Animal {
              }  
           }
         }
+       
     }
     
     public static String consultarAnimal(String identificador)
@@ -347,6 +355,13 @@ public class Animal {
            LocalDate dataAtual = LocalDate.now();
            //Calculando a idade
            this.idade = Period.between(dataNascimento, dataAtual).getYears();
+       }
+       
+       catch(DateTimeParseException d)
+       {
+          JOptionPane.showMessageDialog(null,"Insira o formato correto da data(y-mm-dd)");
+          this.idade = -1;
+          System.out.println(d);
        }
        
        catch(Exception e)

@@ -260,7 +260,7 @@ public class QuantidadeDeVisitasPorAnimal extends javax.swing.JFrame {
             lblDataV.setVisible(false);
             jNomeV.setVisible(false);
             jDataV.setVisible(false);
-            //Clicando novamente
+            //Ao clicar novamente
             jCodAnimal.setVisible(true);
         }
         
@@ -275,7 +275,7 @@ public class QuantidadeDeVisitasPorAnimal extends javax.swing.JFrame {
             lblDataV.setVisible(false);
             jNomeV.setVisible(false);
             jDataV.setVisible(false);
-            //Clicando novamente
+            //Ao clicar novamente
             jCodAnimal.setVisible(true);
         }
     }//GEN-LAST:event_jEscolhaActionPerformed
@@ -293,7 +293,7 @@ public class QuantidadeDeVisitasPorAnimal extends javax.swing.JFrame {
         //Resetando linhas
         modelo.setRowCount(0);
         String itemSelecionado = (String) jEscolha.getSelectedItem();
-        
+        //Validando o texto
         if(itemSelecionado.equals("Tipo de Visita"))
         {
             String tipoVisita = (String) jTipoVisita.getSelectedItem();
@@ -311,13 +311,25 @@ public class QuantidadeDeVisitasPorAnimal extends javax.swing.JFrame {
       
         else if(itemSelecionado.equals("Quantidade de Consultas Realizadas"))
         {
-            String codAnimal = jCodAnimal.getText();
+            String codAnimal = jCodAnimal.getText().trim(); //Remove Espaços desnecessários
+            //Verifica se atende um padrão em específico
+            if(!codAnimal.matches("cli\\d+ao")) 
+            {
+             JOptionPane.showMessageDialog(null,"Formato Invalido!\n Use 'clixao' onde x é um inteiro");
+             return;
+            }
             //Inserindo valores
              setValoresTabela(modelo, new Visitas().ListagemDeConsultasRealizadasPorAnimal(codAnimal));
         }
         else if(itemSelecionado.equals("Quantidade de Vezes que o Animal Realizou a Higiente"))
         {
-            String codAnimal = jCodAnimal.getText();
+            String codAnimal = jCodAnimal.getText().trim();
+            //Verifica se atende um padrão em específico
+            if(!codAnimal.matches("cli\\d+ao")) 
+            {
+             JOptionPane.showMessageDialog(null,"Formato Invalido!\n Use 'clixao' onde x é um inteiro");
+             return;
+            }
             //Inserindo valores
              setValoresTabela(modelo, new Visitas().ListagemDeHigieneRealizadasPorAnimal(codAnimal));
         }
@@ -331,11 +343,15 @@ public class QuantidadeDeVisitasPorAnimal extends javax.swing.JFrame {
         {
             for(String[] linha:lista)
            {
+            //Adiciona linhas a tabela
             modelo.addRow(new Object[]{linha[0],linha[1],linha[2], linha[3],linha[4],linha[5]});
            }
             
+            //Pega a qtd de linhas da tabela
             int qtdLinhas = modelo.getRowCount();
+            //Converte pra String
             String linhas = Integer.toString(qtdLinhas);
+            //Manda pra label
             lblContador.setText(linhas);
         }
         catch(NullPointerException e)

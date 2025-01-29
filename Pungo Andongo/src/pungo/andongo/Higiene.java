@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,25 +41,17 @@ public class Higiene extends Visitas {
     //Registando as vacinas
     private void registarHigiene(String codAnimal)
     {
+        try{
        LocalDate dataV = LocalDate.parse(getDataVisita());
-       //Data Inferior a ser validade
-       LocalDate dataLimite = LocalDate.parse("2024-01-01");
-       //Data Superior a ser validada
-       LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
        if (dataV == null) 
        {
            JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
            return; // Evita que o código continue caso o campo esteja vazio
        }
        
-       if(dataV.isBefore(dataLimite))
+       if(validarData(dataV) == false)
        {
-          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
-       }
-       
-       else if(dataV.isAfter(dataLimiteSup))
-       {
-           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
+           return;
        }
        
        else
@@ -85,6 +78,11 @@ public class Higiene extends Visitas {
                  JOptionPane.showMessageDialog(null,"Visita para Higiene Registada com sucesso\n"+toString());
              }
              
+             catch(DateTimeParseException d)
+             {
+                 JOptionPane.showMessageDialog(null,"Insira o formato correto da data(y-mm-dd)"+d);
+             }
+             
              catch(Exception e)
              {
                 JOptionPane.showMessageDialog(null,"Não foi possível registar a visita\n"+e); 
@@ -106,13 +104,19 @@ public class Higiene extends Visitas {
                  //Mensagem
                  JOptionPane.showMessageDialog(null,"Visita para Higiene Registada com sucesso\n"+toString());
              }
-             
+                  
              catch(Exception e)
              {
                  JOptionPane.showMessageDialog(null,"Não foi possível registar a visita\n"+e); 
              }
           }
        }
+      }
+        catch(DateTimeParseException d)
+        {
+                 JOptionPane.showMessageDialog(null,"Insira o formato correto da data(y-mm-dd)");
+                 System.out.println(d);
+        }
     }
     
     public String toString()

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,11 +46,8 @@ public class Vacinas extends Visitas {
     //Registando as vacinas
     private void registarVacinas(String codAnimal)
     {
+       try{
        LocalDate dataV = LocalDate.parse(getDataVisita());
-       //Data Inferior a ser validade
-       LocalDate dataLimite = LocalDate.parse("2024-01-01");
-       //Data Superior a ser validada
-       LocalDate dataLimiteSup = LocalDate.parse("2024-12-31");
        if (dataV == null) 
        {
            JOptionPane.showMessageDialog(null, "O campo da data da visita encontra-se nulo.");
@@ -62,14 +60,9 @@ public class Vacinas extends Visitas {
            return;
        }
        
-       if(dataV.isBefore(dataLimite))
+       if(validarData(dataV) == false)
        {
-          JOptionPane.showMessageDialog(null,"A data precisa ser superior a 1 de Janeiro de 2024"); 
-       }
-       
-       else if(dataV.isAfter(dataLimiteSup))
-       {
-           JOptionPane.showMessageDialog(null,"A data precisa ser inferior a 31 de Janeiro de 2024"); 
+           return;
        }
        
        else
@@ -95,6 +88,7 @@ public class Vacinas extends Visitas {
                  //Mensagem
                  JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
              }
+              
              
              catch(Exception e)
              {
@@ -117,12 +111,19 @@ public class Vacinas extends Visitas {
                  //Mensagem
                  JOptionPane.showMessageDialog(null,"Vacina Registado com sucesso\n"+toString());
              }
+              
              
              catch(Exception e)
              {
                  JOptionPane.showMessageDialog(null,"Não foi possível registar a visita\n"+e); 
              }
           }
+       }
+       }
+       catch(DateTimeParseException d)
+       {
+                 JOptionPane.showMessageDialog(null,"Insira o formato correto da data(y-mm-dd)");
+                 System.out.println(d);
        }
     }
     //Metodo Get
@@ -140,6 +141,6 @@ public class Vacinas extends Visitas {
     
     public String toString()
     {
-       return getIdentificador()+"\n"+"Tipo de Visita: Vacina"+"\n"+"Nome da Vacina:"+nomeVacina+"\n"+"Custo: "+getCustoPrestado()+" AOA"+"\n"+"Data da Visita: "+getDataVisita(); 
+       return getIdentificador()+"\n"+"Tipo de Visita: Vacina"+"\n"+"Nome da Vacina: "+nomeVacina+"\n"+"Custo: "+getCustoPrestado()+" AOA"+"\n"+"Data da Visita: "+getDataVisita(); 
     }
 }

@@ -1,2 +1,3 @@
-d1ao|Hélvio Celso Batalha Santana|helviocelso234@gmail.com
-d2ao|Hélio Edmar Batalha Santana|helioedmar123@gmail.com
+d1ao|Hélvio Santana|helviocelso234@gmail.com
+d2ao|Daniel Gil|dannygil@gmail.com
+d3ao|Afonso Diela|afonsomo@gmail.com

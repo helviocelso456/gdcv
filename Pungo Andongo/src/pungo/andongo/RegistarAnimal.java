@@ -7,6 +7,7 @@ package pungo.andongo;
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +44,7 @@ public class RegistarAnimal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        txtNasc = new javax.swing.JFormattedTextField();
+        txtNasc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("REGISTRAR ANIMAIS");
@@ -104,8 +105,6 @@ public class RegistarAnimal extends javax.swing.JFrame {
             }
         });
 
-        txtNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("y-MM-dd"))));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,10 +135,10 @@ public class RegistarAnimal extends javax.swing.JFrame {
                                             .addComponent(jButton1)
                                             .addGap(173, 173, 173)
                                             .addComponent(jImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtNasc, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE))
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addComponent(jLabel1)))
@@ -176,11 +175,11 @@ public class RegistarAnimal extends javax.swing.JFrame {
                     .addComponent(jRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,14 +229,24 @@ public class RegistarAnimal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String codProp = txtProp.getText();
+        String codProp = txtProp.getText().trim(); //Remove espaços em branco desnecessários
         String nome = txtNome.getText();
         String especie = (String) jEspecie.getSelectedItem();
         String raca = (String) jRaca.getSelectedItem();
         String dataNasc = txtNasc.getText();
         
-        //Instanciando a classe
-        new Animal(codProp,nome,especie,raca,dataNasc);
+        //Verifica se atende um padrão em específico
+        if(!codProp.matches("d\\d+ao")) 
+        {
+           JOptionPane.showMessageDialog(null,"Formato Invalido!\n Use 'dxao' onde x é um inteiro");
+           return;
+        }
+        
+        else
+        {
+          //Instanciando a classe
+          new Animal(codProp,nome,especie,raca,dataNasc);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -287,7 +296,7 @@ public class RegistarAnimal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jRaca;
-    private javax.swing.JFormattedTextField txtNasc;
+    private javax.swing.JTextField txtNasc;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtProp;
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,8 @@
-1|Consulta|Febre|16000|cli1ao|2025-01-29
-2|Vacina|Astra Zeneca|8000|cli1ao|2024-01-20
-3|Vacina|Pfizer|8000|cli1ao|2024-08-23
-4|Consulta|Sida|16000|cli1ao|2024-03-01
-5|Higiene|Banho|5000|cli1ao|2024-05-21
-6|Higiene|Banho|5000|cli1ao|2024-06-01
-7|Higiene|Banho|5000|cli1ao|2024-06-02
+1|Higiene|Banho|5000|cli1ao|2024-01-01
+2|Higiene|Banho|5000|cli1ao|2024-02-01
+3|Higiene|Banho|5000|cli1ao|2024-03-01
+4|Consulta|Ferimento na pata|16000|cli2ao|2024-03-20
+5|Consulta|Fraqueza no animal|16000|cli2ao|2024-04-10
+6|Vacina|Raiva|8000|cli3ao|2024-04-10
+7|Vacina|Gripe |8000|cli2ao|2024-04-10
+8|Vacina|Gripe suina|8000|cli1ao|2024-05-01

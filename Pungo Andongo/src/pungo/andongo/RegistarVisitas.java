@@ -7,6 +7,7 @@ package pungo.andongo;
 import java.awt.Image;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,11 +42,11 @@ public class RegistarVisitas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jDataVisita = new javax.swing.JFormattedTextField();
         jVacina = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jAnimal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jDataVisita = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("REGISTRAR VISITAS");
@@ -92,8 +93,6 @@ public class RegistarVisitas extends javax.swing.JFrame {
             }
         });
 
-        jDataVisita.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("y-MM-dd"))));
-
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("NOME DA VACINA(Em caso de vacina)");
 
@@ -106,13 +105,12 @@ public class RegistarVisitas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jAnimal)
-                            .addComponent(jDataVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jMotivo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(91, 91, 91))
                     .addGroup(layout.createSequentialGroup()
@@ -128,9 +126,10 @@ public class RegistarVisitas extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDataVisita, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -175,11 +174,11 @@ public class RegistarVisitas extends javax.swing.JFrame {
                     .addComponent(jVacina, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jDataVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,7 +230,13 @@ public class RegistarVisitas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String tipodevisita = (String) jVisita.getSelectedItem();
-        
+        String codAnimal = jAnimal.getText().trim(); //Remove Espaços desnecessários
+        //Verifica se atende um padrão em específico
+        if(!codAnimal.matches("cli\\d+ao"))
+        {
+           JOptionPane.showMessageDialog(null,"Formato Invalido!\n Use 'clixao' onde x é um inteiro");
+           return;
+        }
         //Para o item selecionado
         if(tipodevisita.equals("CONSULTA"))
         {
@@ -239,7 +244,6 @@ public class RegistarVisitas extends javax.swing.JFrame {
             int custo = 16000; 
             String dataVisita = jDataVisita.getText();
             String motivo = jMotivo.getText();
-            String codAnimal = jAnimal.getText();
             //Chamando a classe
             new Visitas(tipodevisita,custo,motivo,codAnimal ,dataVisita);
         } 
@@ -249,7 +253,6 @@ public class RegistarVisitas extends javax.swing.JFrame {
            int custo = 8000; 
            String dataVisita = jDataVisita.getText();
            String nomeVacina = jVacina.getText();
-           String codAnimal = jAnimal.getText();
            //Chamando a classe
            new Visitas(tipodevisita,dataVisita,nomeVacina,codAnimal ,custo);
         }
@@ -259,7 +262,6 @@ public class RegistarVisitas extends javax.swing.JFrame {
            //Valores
            int custo = 5000; 
            String dataVisita = jDataVisita.getText();
-           String codAnimal = jAnimal.getText();
            //Chamando a classe
            new Visitas(tipodevisita, dataVisita,codAnimal ,custo);
         }
@@ -307,7 +309,7 @@ public class RegistarVisitas extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCusto;
-    private javax.swing.JFormattedTextField jDataVisita;
+    private javax.swing.JTextField jDataVisita;
     private javax.swing.JLabel jImagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -145,12 +145,20 @@ public class ConsultarAnimalPorProprietario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //Validando Texto
+        String codProp = txtCodProp.getText().trim(); //Remove Espaços desnecessários
+        //Verifica se atende um padrão em específico
+        if(!codProp.matches("d\\d+ao")) 
+        {
+           JOptionPane.showMessageDialog(null,"Formato Invalido!\n Use 'dxao' onde x é um inteiro");
+           return;
+        }
         //Criando o modelo
         DefaultTableModel modelo = (DefaultTableModel) jTabela1.getModel();
         //Limpando as linhas
         modelo.setRowCount(0);
         //Inserindo valores
-        setValoresTabela(modelo, new Animal().ListarAnimalPorProprietario(txtCodProp.getText()));
+        setValoresTabela(modelo, new Animal().ListarAnimalPorProprietario(codProp));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
