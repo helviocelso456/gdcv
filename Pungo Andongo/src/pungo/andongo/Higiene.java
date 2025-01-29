@@ -68,6 +68,12 @@ public class Higiene extends Visitas {
           {
               try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))  
              {
+                 //Validando o id
+                if( getIdentificador() > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                  //Registando
                  escritor.write(getIdentificador()+"|"+"Higiene"+"|"+"Banho"+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
@@ -95,6 +101,12 @@ public class Higiene extends Visitas {
              {
                  //Atualizando o identificador
                  atualizarId();
+                 //Validando o id
+                if( getIdentificador() > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                  //Registando
                  escritor.write(getIdentificador()+"|"+"Higiene"+"|"+"Banho"+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha

@@ -98,6 +98,12 @@ public class Animal {
             //Tratamento de excessões
              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))
              {
+                //Validando o id
+                if(identificador > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                 //registando
                 escritor.write(animalId+"|"+nome+"|"+especie+"|"+raca+"|"+idade+"|"+codProp);
                 //Quebra a linha
@@ -123,6 +129,12 @@ public class Animal {
              {
                  //Incrementa o id
                 atualizarIdentificador();
+                //Validando o id
+                if(identificador > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                 //Com o novo valor do identificador
                 animalId = "cli"+getIdentificador()+"ao";
                 //registando

@@ -6,3 +6,6 @@
 6|Vacina|Raiva|8000|cli3ao|2024-04-10
 7|Vacina|Gripe |8000|cli2ao|2024-04-10
 8|Vacina|Gripe suina|8000|cli1ao|2024-05-01
+9|Consulta|Ferimento na pata|16000|cli1ao|2024-01-01
+10|Vacina|Raiva|8000|cli3ao|2024-08-01
+11|Higiene|Banho|5000|cli3ao|2024-08-01

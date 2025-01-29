@@ -134,6 +134,12 @@ public class proprietario {
                 //Usamos a classe bufferedwriter para escrever os dados no arquivo
                 try(BufferedWriter br = new BufferedWriter(new FileWriter(caminho)))
                 {   
+                   //Validando o id
+                  if(identificador > 999)
+                  {
+                   JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                   return;
+                  }
                     //Aqui ele escreve
                     br.write(propId+"|"+nome+"|"+contacto);
                     //Quebra uma linha
@@ -156,6 +162,12 @@ public class proprietario {
                 {   
                     //Atualizamos o id
                     atualizarID();
+                    //Validando o id
+                  if(identificador > 999)
+                  {
+                   JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                   return;
+                  }
                     //Novo valor do identificador
                     propId = "d"+getIdentificador()+"ao";
                     //Aqui ele escreve

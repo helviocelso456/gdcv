@@ -78,6 +78,12 @@ public class Consulta extends Visitas {
           {
              try(BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho)))  
              {
+                 //Validando o id
+                if( getIdentificador() > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                  //Registando
                  escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
@@ -104,6 +110,12 @@ public class Consulta extends Visitas {
              {
                  //Atualizando o identificador
                  atualizarId();
+                 //Validando o id
+                if( getIdentificador() > 999)
+                {
+                  JOptionPane.showMessageDialog(null,"O sistema excedeu o limite de registos de animais"); 
+                  return;
+                }
                  //Registando
                  escritor.write(getIdentificador()+"|"+"Consulta"+"|"+motivo+"|"+custo+"|"+codAnimal+"|"+dataV);
                  //Quebrando a linha
