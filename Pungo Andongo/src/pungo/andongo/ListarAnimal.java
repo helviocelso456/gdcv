@@ -151,7 +151,7 @@ public class ListarAnimal extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         //Imagem
-        ImageIcon originalImage = new ImageIcon(getClass().getResource("/imagens/animal.png"));
+        ImageIcon originalImage = new ImageIcon(getClass().getResource("/imagens/logotipo.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(scaledImage);
         jImagem.setIcon(resizedIcon);
