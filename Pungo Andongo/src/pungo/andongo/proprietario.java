@@ -182,7 +182,7 @@ public class proprietario {
                 
                 catch(Exception e)
                 {
-                   JOptionPane.showMessageDialog(null,"Não foi possível registar o cliente"); 
+                   JOptionPane.showMessageDialog(null,"Não foi possível registar o proprietário"); 
                 }
             }  
                
